@@ -17,6 +17,8 @@ use App\Http\Controllers\Api\V1\FavorisEvenementController;
 use App\Http\Controllers\Api\V1\FavorisProuitController;
 use App\Http\Controllers\Api\V1\FavorisTerrainController;
 use App\Http\Controllers\Api\V1\Geust\ChambreController as GeustChambreController;
+use App\Http\Controllers\Api\V1\Geust\HotelController as GeustHotelController;
+use App\Http\Controllers\Api\V1\Geust\HotelShowController;
 use App\Http\Controllers\Api\V1\Geust\PackController;
 use App\Http\Controllers\Api\V1\Geust\PackShowController;
 use App\Http\Controllers\Api\V1\Geust\SnackController;
@@ -139,6 +141,8 @@ Route::prefix('geust/')->group(function () {
     Route::get('snacks/{snack}', SnackShowController::class);
     Route::get('packs', PackController::class);
     Route::get('packs/{pack}', PackShowController::class);
+    Route::get('hotels', GeustHotelController::class);
+    Route::get('hotels/{hotel}', HotelShowController::class);
 });
 
 

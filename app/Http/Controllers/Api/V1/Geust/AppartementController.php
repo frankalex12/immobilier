@@ -12,7 +12,7 @@ class AppartementController extends Controller
     public function __invoke()
     {
         try {
-            return response()->json(AppartementResource::collection(Appartement::paginate(10)), 201);
+            return response()->json(AppartementResource::collection(Appartement::paginate(10)), 200);
         } catch (\Throwable $th) {
             return response()->json(['echec D\'Operation'], 500);
         }

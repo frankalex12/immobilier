@@ -35,6 +35,6 @@ class Terrain extends Model
 
     public function favoris(): MorphMany
     {
-        return $this->morphMany(Favoris::class,'favoriable');
+        return $this->morphMany(Favoris_terrain::class,'favoriable');
     }
 }
