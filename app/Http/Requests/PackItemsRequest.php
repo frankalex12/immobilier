@@ -26,7 +26,7 @@ class PackItemsRequest extends FormRequest
     {
         return [
             'items_name'=>'required|string',
-            'path' => 'image|required',
+            'path' => 'image',
         ];
     }
 

@@ -18,7 +18,7 @@ class PackHotelController extends Controller
     public function index()
     {
         try {
-            return response()->json(Pack::paginate(10), 200);
+            return response()->json(Pack::with('hotel.bien','packitems')->paginate(10), 200);
         } catch (\Throwable $th) {
             return response()->json('Echec d\'Operation !', 500);
         }
@@ -48,7 +48,7 @@ class PackHotelController extends Controller
      */
     public function show(Hotel $hotel, Pack $pack)
     {
-        return response()->json([Pack::findOrFail($pack->id)], 200);
+        return response()->json([Pack::with('hotel.bien','packitems')->findOrFail($pack->id)], 200);
 
     }
 

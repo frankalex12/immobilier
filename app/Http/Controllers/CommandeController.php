@@ -59,7 +59,7 @@ class CommandeController extends Controller
     public function index()
     {
         try {
-            return response()->json(['commande'=>Commande::all()->reverse()], 200);
+            return response()->json(['commande'=>Commande::with('')->findOrFail(Auth::user()->id)->reverse()], 200);
         } catch (\Throwable $th) {
             return response()->json('Echec d\'Operation !', 500);
         }

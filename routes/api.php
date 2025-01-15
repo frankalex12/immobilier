@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\Geust\AppartementController as GeustAppartementC
 use App\Http\Controllers\Api\V1\ChambreController;
 use App\Http\Controllers\Api\V1\ChambreImageController;
 use App\Http\Controllers\Api\V1\ChambreShowController;
+use App\Http\Controllers\Api\V1\CommandeDetailController;
 use App\Http\Controllers\Api\V1\DeleteBienImageController;
 use App\Http\Controllers\Api\V1\EquipementController;
 use App\Http\Controllers\Api\V1\EvenementSnackController;
@@ -26,7 +27,6 @@ use App\Http\Controllers\Api\V1\Geust\TerrainController as GeustTerrainControlle
 use App\Http\Controllers\Api\V1\HoraireSnackController;
 use App\Http\Controllers\Api\V1\HotelController;
 use App\Http\Controllers\Api\V1\HotelImageController;
-use App\Http\Controllers\Api\V1\HotelInstallationController;
 use App\Http\Controllers\Api\V1\InstallationController;
 use App\Http\Controllers\Api\V1\PackHotelController;
 use App\Http\Controllers\Api\V1\PackItemsController;
@@ -36,9 +36,7 @@ use App\Http\Controllers\Api\V1\PanierEvenementController;
 use App\Http\Controllers\Api\V1\PanierPackController;
 use App\Http\Controllers\Api\V1\PanierProuitController;
 use App\Http\Controllers\Api\V1\ProduitSnackController;
-use App\Http\Controllers\Api\V1\ReserveAppartController;
 use App\Http\Controllers\Api\V1\SanckController;
-use App\Http\Controllers\Api\V1\ServiceAppartController;
 use App\Http\Controllers\Api\V1\SnackimageController;
 use App\Http\Controllers\Api\V1\SnackShowController;
 use App\Http\Controllers\Api\V1\TerrainController;
@@ -48,16 +46,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\ProfilController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CommandeAdminController;
 use App\Http\Controllers\CommandeController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Middleware\AuthMiddelWare;
-use App\Models\Favoris_appartement;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Validation\ValidationException;
-
 
 // Authentification ok
 Route::post('register', [RegisterController::class, 'register']);
@@ -99,6 +90,8 @@ Route::middleware('auth:sanctum')->prefix('user/')
         Route::post('commande',[CommandeController::class,'store']);//ok
         Route::get('commande',[CommandeController::class,'index']);//ok
         Route::get('commande/{commande}/annuler',[CommandeController::class,'annuler']);//ok
+        Route::get('/commandes/{commande}', CommandeDetailController::class);
+
     });
 
 
@@ -111,10 +104,9 @@ Route::middleware(['auth:sanctum','admin'])->prefix('/admin')
         Route::apiResource('/appartements', ApparementController::class);
         Route::apiResource('/hotels', HotelController::class);
         Route::apiResource('hotels/{hotel}/chambres', ChambreController::class);
-        // show
         Route::apiResource('hotels/{hotel}/packs', PackHotelController::class);
         // update delete
-        // Route::apiResource('hotels/{hotel}/packs/{pack}/packitems', PackItemsController::class);
+        Route::apiResource('hotels/{hotel}/packs/{pack}/packitems', PackItemsController::class);
         Route::apiResource('/terrains', TerrainController::class);
         // update
         Route::apiResource('/snacks', SanckController::class);
@@ -126,7 +118,9 @@ Route::middleware(['auth:sanctum','admin'])->prefix('/admin')
         Route::post('/hotels/{hotel}/images',HotelImageController::class);
         Route::post('/appartements/{appartement}/images',AppartementImageController::class);
         Route::post('/snacks/{snack}/images', SnackimageController::class);
-        Route::delete('/bien/{bienImg}/images', DeleteBienImageController::class);//---
+        Route::delete('/bien/{bienImg}/images', DeleteBienImageController::class);
+        Route::get('/commandes', CommandeAdminController::class);
+
         // Route::post('/hotels/{hotel}/chambres/{chambre}/images',ChambreImageController::class);
     });
 // routes Visiteurs finalisees et fonctionnelles

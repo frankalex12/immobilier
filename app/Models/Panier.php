@@ -17,5 +17,8 @@ class Panier extends Model
         return $this->morphTo();
     }
 
+    public function Commandes()  {
 
+        return $this->belongsTo(Commande_panier::class);
+    }
 }

@@ -11,6 +11,7 @@ use App\Models\EvenementSnack;
 use App\Models\Horaire;
 use App\Models\Hotel;
 use App\Models\Installation;
+use App\Models\Pack;
 use App\Models\Panier;
 use App\Models\ProduitSnack;
 use App\Models\Proprietaire;
@@ -73,6 +74,7 @@ class DatabaseSeeder extends Seeder
 
         Proprietaire::factory(5)->has(Bien::factory()->count(5)->has(Terrain::factory()->count(5)))->create();
         Proprietaire::factory(5)->has(Bien::factory()->count(5)->has(Hotel::factory()->has(Chambre::factory()->count(5))))->create();
+        // Proprietaire::factory(5)->has(Bien::factory()->count(5)->has(Hotel::factory()->has(Pack::factory()->count(5))))->create();
         Proprietaire::factory(5)->has(Bien::factory()->count(5)->has(Appartement::factory()->count(5)))->create();
         Proprietaire::factory(5)->has(Bien::factory()->count(5)->has(Snack::factory()->count(5)->has(Horaire::factory()->count(5))))->create();
         Proprietaire::factory(5)->has(Bien::factory()->count(5)->has(Snack::factory()->count(5)->has(ProduitSnack::factory()->count(5))))->create();

@@ -19,7 +19,7 @@ class Pack extends Model
 
     public function packitems()  {
 
-        return $this->hasMany(PackItems::class);
+        return $this->hasMany(PackItems::class,'App\Models\Pack');
     }
 
     public function panier(): MorphMany
@@ -27,7 +27,7 @@ class Pack extends Model
         return $this->morphMany(Panier::class,'panierable');
     }
     public function hotel()  {
-        return $this->belongsTo(Hotel::class);
+        return $this->belongsTo(Hotel::class,'App\Models\Hotel');
     }
 
 }

@@ -17,6 +17,6 @@ class PackItems extends Model
 
     public function pack()  {
 
-        return $this->belongsTo(Pack::class);
+        return $this->belongsTo(Pack::class,'App\Models\Pack');
     }
 }
